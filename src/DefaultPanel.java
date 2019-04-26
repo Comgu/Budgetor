@@ -1,7 +1,9 @@
+import javax.swing.*;
+import java.awt.*;
 
 public class DefaultPanel extends javax.swing.JFrame {
     public DefaultPanel() {
-        initComponents();
+        initComponents2();
     }
 
     /**
@@ -13,58 +15,206 @@ public class DefaultPanel extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
+        TabbedPane = new javax.swing.JTabbedPane();
+        CurrentMonth = new javax.swing.JPanel();
+        Expenses = new java.awt.List();
+        Budget = new javax.swing.JPanel();
+        Settings = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(512, 384));
+        setResizable(false);
 
-        jMenu1.setText("BACK");
-        jMenu1.setPreferredSize(new java.awt.Dimension(64, 32));
-        jMenuBar1.add(jMenu1);
+        TabbedPane.setPreferredSize(new java.awt.Dimension(512, 384));
 
-        jMenu2.setText("FORWARD");
-        jMenu2.setPreferredSize(new java.awt.Dimension(64, 32));
-        jMenuBar1.add(jMenu2);
+        javax.swing.GroupLayout CurrentMonthLayout = new javax.swing.GroupLayout(CurrentMonth);
+        CurrentMonth.setLayout(CurrentMonthLayout);
+        CurrentMonthLayout.setHorizontalGroup(
+            CurrentMonthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CurrentMonthLayout.createSequentialGroup()
+                .addContainerGap(335, Short.MAX_VALUE)
+                .addComponent(Expenses, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        CurrentMonthLayout.setVerticalGroup(
+            CurrentMonthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CurrentMonthLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(Expenses, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(107, Short.MAX_VALUE))
+        );
 
-        jMenu3.setText("CURRENT MONTH");
-        jMenu3.setPreferredSize(new java.awt.Dimension(128, 32));
-        jMenuBar1.add(jMenu3);
+        TabbedPane.addTab("CURRENT MONTH", CurrentMonth);
 
-        jMenu4.setText("BUDGET ADJUSTMENT");
-        jMenu4.setPreferredSize(new java.awt.Dimension(128, 32));
-        jMenuBar1.add(jMenu4);
+        javax.swing.GroupLayout BudgetLayout = new javax.swing.GroupLayout(Budget);
+        Budget.setLayout(BudgetLayout);
+        BudgetLayout.setHorizontalGroup(
+            BudgetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 507, Short.MAX_VALUE)
+        );
+        BudgetLayout.setVerticalGroup(
+            BudgetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 370, Short.MAX_VALUE)
+        );
 
-        jMenu5.setText("SETTINGS");
-        jMenu5.setPreferredSize(new java.awt.Dimension(128, 32));
-        jMenuBar1.add(jMenu5);
+        TabbedPane.addTab("BUDGET ADJUSTMENT", Budget);
 
-        setJMenuBar(jMenuBar1);
+        javax.swing.GroupLayout SettingsLayout = new javax.swing.GroupLayout(Settings);
+        Settings.setLayout(SettingsLayout);
+        SettingsLayout.setHorizontalGroup(
+            SettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 507, Short.MAX_VALUE)
+        );
+        SettingsLayout.setVerticalGroup(
+            SettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 370, Short.MAX_VALUE)
+        );
+
+        TabbedPane.addTab("SETTINGS", Settings);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(TabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 266, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(TabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+   // <editor-fold defaultstate="collapsed" desc="Own code for trying stuff">                          
+    private void initComponents2() {
+        // Adds images to tabs
+        ImageIcon iconMonth = createImageIcon("img/currentmonth.png");
+        ImageIcon iconBudget = createImageIcon("img/budget.png");
+        ImageIcon iconSettings = createImageIcon("img/settings.png");
+        
+       TabbedPane = new javax.swing.JTabbedPane();
+        CurrentMonth = new javax.swing.JPanel();
+        Expenses = new java.awt.List();
+        Budget = new javax.swing.JPanel();
+        Settings = new javax.swing.JPanel();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(512, 384));
+        setResizable(false);
+
+        TabbedPane.setPreferredSize(new java.awt.Dimension(512, 384));
+
+        javax.swing.GroupLayout CurrentMonthLayout = new javax.swing.GroupLayout(CurrentMonth);
+        CurrentMonth.setLayout(CurrentMonthLayout);
+        CurrentMonthLayout.setHorizontalGroup(
+            CurrentMonthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CurrentMonthLayout.createSequentialGroup()
+                .addContainerGap(335, Short.MAX_VALUE)
+                .addComponent(Expenses, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        CurrentMonthLayout.setVerticalGroup(
+            CurrentMonthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CurrentMonthLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(Expenses, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(54, Short.MAX_VALUE))
+        );
+
+        TabbedPane.addTab("CURRENT MONTH", iconMonth, CurrentMonth);
+
+        javax.swing.GroupLayout BudgetLayout = new javax.swing.GroupLayout(Budget);
+        Budget.setLayout(BudgetLayout);
+        BudgetLayout.setHorizontalGroup(
+            BudgetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 507, Short.MAX_VALUE)
+        );
+        BudgetLayout.setVerticalGroup(
+            BudgetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 370, Short.MAX_VALUE)
+        );
+
+        TabbedPane.addTab("BUDGET ADJUSTMENT", iconBudget, Budget);
+
+        javax.swing.GroupLayout SettingsLayout = new javax.swing.GroupLayout(Settings);
+        Settings.setLayout(SettingsLayout);
+        SettingsLayout.setHorizontalGroup(
+            SettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 507, Short.MAX_VALUE)
+        );
+        SettingsLayout.setVerticalGroup(
+            SettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 370, Short.MAX_VALUE)
+        );
+
+        TabbedPane.addTab("SETTINGS", iconSettings, Settings);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(TabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(TabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        pack();
+    }// </editor-fold>
+    
+    
+    protected static ImageIcon createImageIcon(String path) {
+        java.net.URL imgURL = DefaultPanel.class.getResource(path);
+        if (imgURL != null) {
+            return new ImageIcon(imgURL);
+        } else {
+            System.err.println("Couldn't find file: " + path);
+            return null;
+        }
+    }
+    
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(DefaultPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(DefaultPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(DefaultPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(DefaultPanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new DefaultPanel().setVisible(true);
+            }
+        });
+    }        
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
-    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel Budget;
+    private javax.swing.JPanel CurrentMonth;
+    private java.awt.List Expenses;
+    private javax.swing.JPanel Settings;
+    private javax.swing.JTabbedPane TabbedPane;
     // End of variables declaration//GEN-END:variables
 }

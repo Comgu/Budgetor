@@ -3,7 +3,7 @@ import java.awt.*;
 
 public class DefaultPanel extends javax.swing.JFrame {
     public DefaultPanel() {
-        initComponents2();
+        initComponents();
     }
 
     /**
@@ -17,32 +17,162 @@ public class DefaultPanel extends javax.swing.JFrame {
 
         TabbedPane = new javax.swing.JTabbedPane();
         CurrentMonth = new javax.swing.JPanel();
-        Expenses = new java.awt.List();
+        expensesTable = new javax.swing.JTable();
+        expensesTitle = new javax.swing.JTextField();
+        historyButton = new javax.swing.JButton();
+        addCostPanel = new javax.swing.JPanel();
+        addCostTitle = new javax.swing.JTextField();
         Budget = new javax.swing.JPanel();
         Settings = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(512, 384));
+        setTitle("Budgetor");
+        setName("budgetorFrame"); // NOI18N
+        setPreferredSize(new java.awt.Dimension(640, 480));
         setResizable(false);
 
-        TabbedPane.setPreferredSize(new java.awt.Dimension(512, 384));
+        TabbedPane.setPreferredSize(new java.awt.Dimension(640, 480));
+
+        expensesTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        expensesTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"Rent", "400/400 €"},
+                {"Food", "300/400 €"},
+                {"Other", "220/200 €"},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {"TOTAL", "920/1000 €"}
+            },
+            new String [] {
+                "Expense", "Sum"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        expensesTable.getTableHeader().setReorderingAllowed(false);
+
+        expensesTitle.setEditable(false);
+        expensesTitle.setBackground(new java.awt.Color(220, 220, 220));
+        expensesTitle.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
+        expensesTitle.setText("EXPENSES");
+        expensesTitle.setBorder(null);
+        expensesTitle.setFocusable(false);
+        expensesTitle.setRequestFocusEnabled(false);
+        expensesTitle.setSelectedTextColor(new java.awt.Color(240, 240, 240));
+        expensesTitle.setVerifyInputWhenFocusTarget(false);
+        expensesTitle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                expensesTitleActionPerformed(evt);
+            }
+        });
+
+        historyButton.setText("See full history of costs this month");
+        historyButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                historyButtonActionPerformed(evt);
+            }
+        });
+
+        addCostPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        addCostTitle.setEditable(false);
+        addCostTitle.setBackground(new java.awt.Color(220, 220, 220));
+        addCostTitle.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        addCostTitle.setText("ADD NEW COST ");
+        addCostTitle.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        addCostTitle.setFocusable(false);
+        addCostTitle.setRequestFocusEnabled(false);
+        addCostTitle.setSelectedTextColor(new java.awt.Color(240, 240, 240));
+        addCostTitle.setVerifyInputWhenFocusTarget(false);
+        addCostTitle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addCostTitleActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout addCostPanelLayout = new javax.swing.GroupLayout(addCostPanel);
+        addCostPanel.setLayout(addCostPanelLayout);
+        addCostPanelLayout.setHorizontalGroup(
+            addCostPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addCostPanelLayout.createSequentialGroup()
+                .addComponent(addCostTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 207, Short.MAX_VALUE))
+        );
+        addCostPanelLayout.setVerticalGroup(
+            addCostPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addCostPanelLayout.createSequentialGroup()
+                .addComponent(addCostTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 84, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout CurrentMonthLayout = new javax.swing.GroupLayout(CurrentMonth);
         CurrentMonth.setLayout(CurrentMonthLayout);
         CurrentMonthLayout.setHorizontalGroup(
             CurrentMonthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CurrentMonthLayout.createSequentialGroup()
-                .addContainerGap(335, Short.MAX_VALUE)
-                .addComponent(Expenses, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGroup(CurrentMonthLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(expensesTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(100, 100, 100))
+            .addGroup(CurrentMonthLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(addCostPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(CurrentMonthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(CurrentMonthLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(historyButton)
+                        .addGap(43, 43, 43))
+                    .addGroup(CurrentMonthLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(expensesTable, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(23, Short.MAX_VALUE))))
         );
         CurrentMonthLayout.setVerticalGroup(
             CurrentMonthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CurrentMonthLayout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(Expenses, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(107, Short.MAX_VALUE))
+                .addGap(13, 13, 13)
+                .addComponent(expensesTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(CurrentMonthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(CurrentMonthLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(expensesTable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(22, 22, 22)
+                        .addComponent(historyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(58, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CurrentMonthLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(addCostPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45))))
         );
+
+        if (expensesTable.getColumnModel().getColumnCount() > 0) {
+            expensesTable.getColumnModel().getColumn(0).setResizable(false);
+            expensesTable.getColumnModel().getColumn(1).setResizable(false);
+        }
 
         TabbedPane.addTab("CURRENT MONTH", CurrentMonth);
 
@@ -50,11 +180,11 @@ public class DefaultPanel extends javax.swing.JFrame {
         Budget.setLayout(BudgetLayout);
         BudgetLayout.setHorizontalGroup(
             BudgetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 507, Short.MAX_VALUE)
+            .addGap(0, 635, Short.MAX_VALUE)
         );
         BudgetLayout.setVerticalGroup(
             BudgetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 370, Short.MAX_VALUE)
+            .addGap(0, 452, Short.MAX_VALUE)
         );
 
         TabbedPane.addTab("BUDGET ADJUSTMENT", Budget);
@@ -63,11 +193,11 @@ public class DefaultPanel extends javax.swing.JFrame {
         Settings.setLayout(SettingsLayout);
         SettingsLayout.setHorizontalGroup(
             SettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 507, Short.MAX_VALUE)
+            .addGap(0, 635, Short.MAX_VALUE)
         );
         SettingsLayout.setVerticalGroup(
             SettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 370, Short.MAX_VALUE)
+            .addGap(0, 452, Short.MAX_VALUE)
         );
 
         TabbedPane.addTab("SETTINGS", Settings);
@@ -76,27 +206,43 @@ public class DefaultPanel extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(TabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(TabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(TabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(TabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-   // <editor-fold defaultstate="collapsed" desc="Own code for trying stuff">                          
+
+    private void expensesTitleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_expensesTitleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_expensesTitleActionPerformed
+
+    private void historyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_historyButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_historyButtonActionPerformed
+
+    private void addCostTitleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCostTitleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addCostTitleActionPerformed
+   // <editor-fold defaultstate="collapsed" desc="Own code for trying stuff">    
+    /*
     private void initComponents2() {
         // Adds images to tabs
         ImageIcon iconMonth = createImageIcon("img/currentmonth.png");
         ImageIcon iconBudget = createImageIcon("img/budget.png");
         ImageIcon iconSettings = createImageIcon("img/settings.png");
         
-       TabbedPane = new javax.swing.JTabbedPane();
+        TabbedPane = new javax.swing.JTabbedPane();
         CurrentMonth = new javax.swing.JPanel();
-        Expenses = new java.awt.List();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextPane1 = new javax.swing.JTextPane();
         Budget = new javax.swing.JPanel();
         Settings = new javax.swing.JPanel();
 
@@ -106,24 +252,80 @@ public class DefaultPanel extends javax.swing.JFrame {
 
         TabbedPane.setPreferredSize(new java.awt.Dimension(512, 384));
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"Rent", "400/400 €"},
+                {"Food", "300/400 €"},
+                {"Other", "220/200 €"},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Expense", "Sum"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
+        }
+
+        jTextPane1.setEditable(false);
+        jTextPane1.setBackground(new java.awt.Color(240, 240, 240));
+        jTextPane1.setText("EXPENSES");
+        jTextPane1.setFocusable(false);
+        jScrollPane1.setViewportView(jTextPane1);
+
         javax.swing.GroupLayout CurrentMonthLayout = new javax.swing.GroupLayout(CurrentMonth);
         CurrentMonth.setLayout(CurrentMonthLayout);
         CurrentMonthLayout.setHorizontalGroup(
             CurrentMonthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CurrentMonthLayout.createSequentialGroup()
-                .addContainerGap(335, Short.MAX_VALUE)
-                .addComponent(Expenses, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGroup(CurrentMonthLayout.createSequentialGroup()
+                .addContainerGap(295, Short.MAX_VALUE)
+                .addGroup(CurrentMonthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CurrentMonthLayout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CurrentMonthLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(66, 66, 66))))
         );
         CurrentMonthLayout.setVerticalGroup(
             CurrentMonthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CurrentMonthLayout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(Expenses, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(86, Short.MAX_VALUE))
         );
 
-        TabbedPane.addTab("CURRENT MONTH", iconMonth, CurrentMonth);
+        TabbedPane.addTab("CURRENT MONTH",iconMonth, CurrentMonth);
 
         javax.swing.GroupLayout BudgetLayout = new javax.swing.GroupLayout(Budget);
         Budget.setLayout(BudgetLayout);
@@ -133,10 +335,10 @@ public class DefaultPanel extends javax.swing.JFrame {
         );
         BudgetLayout.setVerticalGroup(
             BudgetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 370, Short.MAX_VALUE)
+            .addGap(0, 394, Short.MAX_VALUE)
         );
 
-        TabbedPane.addTab("BUDGET ADJUSTMENT", iconBudget, Budget);
+        TabbedPane.addTab("BUDGET ADJUSTMENT",iconBudget, Budget);
 
         javax.swing.GroupLayout SettingsLayout = new javax.swing.GroupLayout(Settings);
         Settings.setLayout(SettingsLayout);
@@ -146,10 +348,10 @@ public class DefaultPanel extends javax.swing.JFrame {
         );
         SettingsLayout.setVerticalGroup(
             SettingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 370, Short.MAX_VALUE)
+            .addGap(0, 394, Short.MAX_VALUE)
         );
 
-        TabbedPane.addTab("SETTINGS", iconSettings, Settings);
+        TabbedPane.addTab("SETTINGS",iconSettings, Settings);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -166,7 +368,7 @@ public class DefaultPanel extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>
-    
+    */
     
     protected static ImageIcon createImageIcon(String path) {
         java.net.URL imgURL = DefaultPanel.class.getResource(path);
@@ -213,8 +415,12 @@ public class DefaultPanel extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Budget;
     private javax.swing.JPanel CurrentMonth;
-    private java.awt.List Expenses;
     private javax.swing.JPanel Settings;
     private javax.swing.JTabbedPane TabbedPane;
+    private javax.swing.JPanel addCostPanel;
+    private javax.swing.JTextField addCostTitle;
+    private javax.swing.JTable expensesTable;
+    private javax.swing.JTextField expensesTitle;
+    private javax.swing.JButton historyButton;
     // End of variables declaration//GEN-END:variables
 }

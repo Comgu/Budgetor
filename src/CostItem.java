@@ -5,6 +5,8 @@ public class CostItem {
     int price;
     int quantity;
     
+    public CostItem(){}
+    
     public CostItem(String inputName, String inputType, int inputPrice, int inputQuantity){
         this.name = inputName;
         this.type = inputType;

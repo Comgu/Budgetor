@@ -72,20 +72,17 @@
                               <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                               <Component id="addCostPanel" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
-                                  <Component id="dayTitle" min="-2" pref="111" max="-2" attributes="0"/>
-                                  <EmptySpace min="56" pref="56" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                                  <Component id="monthProgressBar" min="-2" pref="246" max="-2" attributes="0"/>
-                              </Group>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
+                              <Component id="dayTitle" min="-2" pref="111" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="111" max="-2" attributes="0"/>
                               <Component id="infoText" min="-2" pref="109" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                              <Component id="monthProgressBar" min="-2" pref="276" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -195,7 +192,7 @@
                     </Column>
                   </Table>
                 </Property>
-                <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="for(int i=0; i &lt; types.size(); i++){&#xa;    expensesTable.getModel().setValueAt(types.get(i), i, 0);&#xa;    expensesTable.getModel().setValueAt(itemList.getPriceFromType(types.get(i)) + &quot; &quot; + currency, i, 1);&#xa;}&#xa;&#xa;int totalVal = 0;&#xa;&#xa;for(int i=0; i &lt; expensesTable.getRowCount() - 1; i++){&#xa;    if(expensesTable.getModel().getValueAt(i, 1) != null){&#xa;        String val = (String) expensesTable.getModel().getValueAt(i, 1);&#xa;        val = val.replace(currency, &quot;&quot;);&#xa;        val = val.replace(&quot; &quot;, &quot;&quot;);&#xa;        totalVal += Integer.parseInt(val);&#xa;    }&#xa;}&#xa;expensesTable.getModel().setValueAt(totalVal + &quot; &quot; + currency, 19, 1);">
+                <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="updateMonthTable();">
                   <TableColumnModel selectionModel="0">
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                       <Title/>
@@ -337,6 +334,7 @@
                 <Component class="javax.swing.JTextField" name="nameField">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Name"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Insert cost name here"/>
                   </Properties>
                   <Events>
                     <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="nameFieldFocusGained"/>
@@ -347,6 +345,7 @@
                 <Component class="javax.swing.JTextField" name="typeField">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Type"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Insert cost type"/>
                   </Properties>
                   <Events>
                     <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="typeFieldFocusGained"/>
@@ -357,6 +356,7 @@
                 <Component class="javax.swing.JTextField" name="priceField">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Price"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Insert price here"/>
                   </Properties>
                   <Events>
                     <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="priceFieldFocusGained"/>
@@ -369,6 +369,7 @@
                       <Font name="Tahoma" size="10" style="0"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Quantity"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Insert quantity here"/>
                   </Properties>
                   <Events>
                     <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="quantityFieldFocusGained"/>
@@ -379,6 +380,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="ADD"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addButtonActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="undoButton">
                   <Properties>

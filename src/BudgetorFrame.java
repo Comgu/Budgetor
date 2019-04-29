@@ -39,6 +39,9 @@ public class BudgetorFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        historyFrame = new javax.swing.JFrame();
+        historyScrollPane = new javax.swing.JScrollPane();
+        historyTable = new javax.swing.JTable();
         // Setting default data to program
         CostItem rent = new CostItem("Rent", 300, 1);
         CostItem food = new CostItem("Food", 200, 1);
@@ -98,6 +101,63 @@ public class BudgetorFrame extends javax.swing.JFrame {
         separator2 = new javax.swing.JSeparator();
         languageDropdown = new javax.swing.JComboBox<>();
 
+        historyFrame.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        historyFrame.setTitle("History of costs");
+        historyFrame.setAlwaysOnTop(true);
+        historyFrame.setFocusableWindowState(false);
+        historyFrame.setName("historyFrame"); // NOI18N
+        historyFrame.setResizable(false);
+        historyFrame.setSize(new java.awt.Dimension(400, 300));
+        historyFrame.setLocationRelativeTo(null);
+
+        historyTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null}
+            },
+            new String [] {
+                "Name", "Type", "Price", "Date"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        historyScrollPane.setViewportView(historyTable);
+        if (historyTable.getColumnModel().getColumnCount() > 0) {
+            historyTable.getColumnModel().getColumn(0).setResizable(false);
+            historyTable.getColumnModel().getColumn(1).setResizable(false);
+            historyTable.getColumnModel().getColumn(2).setResizable(false);
+            historyTable.getColumnModel().getColumn(3).setResizable(false);
+        }
+
+        javax.swing.GroupLayout historyFrameLayout = new javax.swing.GroupLayout(historyFrame.getContentPane());
+        historyFrame.getContentPane().setLayout(historyFrameLayout);
+        historyFrameLayout.setHorizontalGroup(
+            historyFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(historyFrameLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(historyScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
+        historyFrameLayout.setVerticalGroup(
+            historyFrameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(historyFrameLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(historyScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Budgetor");
         setName("budgetorFrame"); // NOI18N
@@ -118,6 +178,11 @@ public class BudgetorFrame extends javax.swing.JFrame {
         expensesTitle.setRequestFocusEnabled(false);
         expensesTitle.setSelectedTextColor(new java.awt.Color(240, 240, 240));
         expensesTitle.setVerifyInputWhenFocusTarget(false);
+        expensesTitle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                expensesTitleActionPerformed(evt);
+            }
+        });
 
         historyButton.setText("See full history of costs this month");
         historyButton.addActionListener(new java.awt.event.ActionListener() {
@@ -707,7 +772,8 @@ public class BudgetorFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void historyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_historyButtonActionPerformed
-        new HistoryFrame().setVisible(true);
+        historyFrame.setVisible(true);
+        updateHistoryTable();
     }//GEN-LAST:event_historyButtonActionPerformed
 
     private void undoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_undoButtonActionPerformed
@@ -900,6 +966,10 @@ public class BudgetorFrame extends javax.swing.JFrame {
     private void priceFieldBudgetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceFieldBudgetActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_priceFieldBudgetActionPerformed
+
+    private void expensesTitleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_expensesTitleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_expensesTitleActionPerformed
    // <editor-fold defaultstate="collapsed" desc="Own code for trying stuff">    
     private void updateMonthTable(){
         types = itemList.getAllTypes();
@@ -957,8 +1027,12 @@ public class BudgetorFrame extends javax.swing.JFrame {
     }
     
     private void updateBudgetTable(){
+        for(int i=0; i < budgetTable.getRowCount(); i++){
+            budgetTable.getModel().setValueAt(null, i, 0);            
+            budgetTable.getModel().setValueAt(null, i, 1);            
+        }        
         for(int i=0; i < budgetList.getSize(); i++){
-            if(i >= budgetTable.getRowCount()){
+            if(i >= budgetTable.getRowCount() - 1){
                 javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) budgetTable.getModel();
                 model.addRow(new Object[]{null, null});
             }
@@ -970,6 +1044,28 @@ public class BudgetorFrame extends javax.swing.JFrame {
         }
         updateMonthTable();
     }    
+    
+    private void updateHistoryTable(){
+        for(int i=0; i < historyTable.getRowCount(); i++){
+            historyTable.getModel().setValueAt(null, i, 0);            
+            historyTable.getModel().setValueAt(null, i, 1); 
+            historyTable.getModel().setValueAt(null, i, 2); 
+            historyTable.getModel().setValueAt(null, i, 3);             
+        }        
+        int j = 0;
+        for(int i=itemList.getSize()-1; i > -1; i--){
+            if(j >= historyTable.getRowCount() - 1){
+                javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) historyTable.getModel();
+                model.addRow(new Object[]{null, null, null, null});
+            }            
+            CostItem item = itemList.getItemAt(i);
+            historyTable.getModel().setValueAt(item.getName(), j, 0);
+            historyTable.getModel().setValueAt(item.getType(), j, 1);            
+            historyTable.getModel().setValueAt(item.getPrice() * item.getQuantity(), j, 2);
+            historyTable.getModel().setValueAt(item.getDate(), j, 3);
+            j++;
+        }
+    }
     
     private boolean checkCostInput(){           // Check validity of add cost inputs
         boolean validity = true;
@@ -1090,6 +1186,9 @@ public class BudgetorFrame extends javax.swing.JFrame {
     private javax.swing.JTextField expensesTitle;
     private javax.swing.JPanel generalSettingsTab;
     private javax.swing.JButton historyButton;
+    private javax.swing.JFrame historyFrame;
+    private javax.swing.JScrollPane historyScrollPane;
+    private javax.swing.JTable historyTable;
     private javax.swing.JTextField infoText;
     private javax.swing.JComboBox<String> languageDropdown;
     private javax.swing.JTextField languageText;

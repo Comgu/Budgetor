@@ -63,4 +63,8 @@ public class CostList {
             deleteItem(this.previousItem);
         }
     }
+    
+    public int getSize(){
+        return this.itemList.size();        
+    }    
 }

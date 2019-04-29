@@ -5,19 +5,6 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 
-/* TO DO:   History class                                                       (30 min)
-            Budget adding panel finish                                          (20 min)
-            Buttons for removing budget and cost items, also to history         (60 min)
-            Statistical representation for month and budget                     (30 min)
-            More settings?                                                      (15 min)
-            Maybe table expanding for month                                     (30 min)
-            Budget part for month table (200/300 €), coloring if over           (15 min)
-            Undo previous cost                                                  (30 min)
-            Notification when added new cost/budget                             (15 min)
-            Up/Down arrows for raising budget                                   (15 min)
-            Editing budget items in adjust by typing                            (15 min)
-            Apply & reset buttons for settings                                  (15 min)
-*/
 public class BudgetorFrame extends javax.swing.JFrame {
     CostList itemList = new CostList();
     BudgetList budgetList = new BudgetList();
@@ -110,7 +97,6 @@ public class BudgetorFrame extends javax.swing.JFrame {
         historyFrame.setAlwaysOnTop(true);
         historyFrame.setFocusableWindowState(false);
         historyFrame.setName("historyFrame"); // NOI18N
-        historyFrame.setPreferredSize(new java.awt.Dimension(400, 360));
         historyFrame.setResizable(false);
         historyFrame.setSize(new java.awt.Dimension(400, 360));
         historyFrame.setLocationRelativeTo(null);
@@ -184,7 +170,6 @@ public class BudgetorFrame extends javax.swing.JFrame {
         setTitle("Budgetor");
         setBackground(new java.awt.Color(225, 225, 225));
         setName("budgetorFrame"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(640, 480));
         setResizable(false);
 
         mainTabs.setBackground(new java.awt.Color(225, 225, 225));
@@ -204,11 +189,6 @@ public class BudgetorFrame extends javax.swing.JFrame {
         expensesTitle.setRequestFocusEnabled(false);
         expensesTitle.setSelectedTextColor(new java.awt.Color(240, 240, 240));
         expensesTitle.setVerifyInputWhenFocusTarget(false);
-        expensesTitle.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                expensesTitleActionPerformed(evt);
-            }
-        });
 
         historyButton.setText("See full history of costs this month");
         historyButton.addActionListener(new java.awt.event.ActionListener() {
@@ -397,11 +377,6 @@ public class BudgetorFrame extends javax.swing.JFrame {
         totalField.setBackground(new java.awt.Color(225, 225, 225));
         totalField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         totalField.setFocusable(false);
-        totalField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                totalFieldActionPerformed(evt);
-            }
-        });
 
         expensesTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         expensesTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -533,11 +508,6 @@ public class BudgetorFrame extends javax.swing.JFrame {
                 nameFieldBudgetFocusLost(evt);
             }
         });
-        nameFieldBudget.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nameFieldBudgetActionPerformed(evt);
-            }
-        });
 
         typeFieldBudget.setText("Type");
         typeFieldBudget.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -557,11 +527,6 @@ public class BudgetorFrame extends javax.swing.JFrame {
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 priceFieldBudgetFocusLost(evt);
-            }
-        });
-        priceFieldBudget.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                priceFieldBudgetActionPerformed(evt);
             }
         });
 
@@ -592,16 +557,18 @@ public class BudgetorFrame extends javax.swing.JFrame {
         addBudgetPanelLayout.setVerticalGroup(
             addBudgetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(addBudgetPanelLayout.createSequentialGroup()
-                .addComponent(addBudgetTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addBudgetPanelLayout.createSequentialGroup()
-                .addContainerGap(25, Short.MAX_VALUE)
-                .addGroup(addBudgetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nameFieldBudget, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(typeFieldBudget, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(priceFieldBudget, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(addButtonBudget, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(addBudgetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(addBudgetPanelLayout.createSequentialGroup()
+                        .addComponent(addBudgetTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addBudgetPanelLayout.createSequentialGroup()
+                        .addContainerGap(25, Short.MAX_VALUE)
+                        .addGroup(addBudgetPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(nameFieldBudget, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(typeFieldBudget, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(priceFieldBudget, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(addButtonBudget, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -707,7 +674,7 @@ public class BudgetorFrame extends javax.swing.JFrame {
                     .addGroup(budgetTabLayout.createSequentialGroup()
                         .addGap(122, 122, 122)
                         .addComponent(deleteBudgetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         budgetTabLayout.setVerticalGroup(
             budgetTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -722,9 +689,9 @@ public class BudgetorFrame extends javax.swing.JFrame {
                         .addComponent(allocationTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(percentageScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(9, 9, 9)
+                .addGap(4, 4, 4)
                 .addComponent(deleteBudgetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(addBudgetPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -1029,22 +996,6 @@ public class BudgetorFrame extends javax.swing.JFrame {
         nameFieldBudget.setBackground(new java.awt.Color(255,255,255));
         priceFieldBudget.setBackground(new java.awt.Color(255,255,255));  
     }//GEN-LAST:event_addButtonBudgetActionPerformed
-
-    private void totalFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_totalFieldActionPerformed
-
-    private void nameFieldBudgetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameFieldBudgetActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nameFieldBudgetActionPerformed
-
-    private void priceFieldBudgetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceFieldBudgetActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_priceFieldBudgetActionPerformed
-
-    private void expensesTitleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_expensesTitleActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_expensesTitleActionPerformed
 
     private void deleteHistoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteHistoryButtonActionPerformed
         javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) this.historyTable.getModel();

@@ -14,6 +14,14 @@ public class BudgetList {
     public void deleteItem(BudgetItem item){
         this.budgetList.remove(item);
     }
+    
+    public void deleteItem(String name, String type, int price){
+        for(int i=0; i < budgetList.size(); i++){
+            if(budgetList.get(i).getName().equals(name) && budgetList.get(i).getType().equals(type) && budgetList.get(i).getPrice() == price){
+                deleteItem(budgetList.get(i));
+            }
+       }
+    }        
 
     public BudgetItem getItemAt(int i){
         return this.budgetList.get(i);

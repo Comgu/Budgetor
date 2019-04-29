@@ -22,10 +22,8 @@ public class CostList {
     }
     public void deleteItem(String name, String type, int price, int quantity,  LocalDate date){
         for(int i=0; i < itemList.size(); i++){
-            CostItem item = new CostItem(name, type, price, quantity, date);
-            if(item.getName().equals(name) && item.getType().equals(type) && item.getPrice() == price && item.getQuantity() == quantity && item.getDate() == date){
+            if(itemList.get(i).getName().equals(name) && itemList.get(i).getType().equals(type) && itemList.get(i).getPrice() == price && itemList.get(i).getQuantity() == quantity && itemList.get(i).getDate() == date)
                 deleteItem(itemList.get(i));
-            }
        }
     }      
 

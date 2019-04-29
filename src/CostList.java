@@ -2,22 +2,31 @@ import java.util.ArrayList;
 
 public class CostList {
     ArrayList<CostItem> itemList;
+    CostItem previousItem;
     
     public CostList(){
         this.itemList = new ArrayList<CostItem>();
+        this.previousItem = null;
     }
     
     public void addItem(CostItem item){
         this.itemList.add(item);
+        this.previousItem = item;   
     }
     
     public void deleteItem(CostItem item){
         this.itemList.remove(item);
-    }
+        if(this.previousItem == item)
+            this.previousItem = null;
+    }  
 
     public CostItem getItemAt(int i){
         return this.itemList.get(i);
-    } 
+    }
+    
+    public void resetPreviousItem(){
+        this.previousItem = null;
+    }
     
     public ArrayList<String> getAllTypes(){
         ArrayList<String> types = new ArrayList<String>();
@@ -47,5 +56,11 @@ public class CostList {
         }
         
         return val;
+    }
+    
+    public void undoPrevious(){
+        if(this.previousItem != null){
+            deleteItem(this.previousItem);
+        }
     }
 }

@@ -21,7 +21,8 @@ import java.util.ArrayList;
 public class BudgetorFrame extends javax.swing.JFrame {
     CostList itemList = new CostList();
     BudgetList budgetList = new BudgetList();
-    ArrayList<String> types;   
+    ArrayList<String> types;  
+    ArrayList<String> budgetTypes;
     String currency = "$";    
     
     public BudgetorFrame() {
@@ -49,11 +50,12 @@ public class BudgetorFrame extends javax.swing.JFrame {
         itemList.addItem(rent);
         itemList.addItem(food);
         itemList.addItem(clothes);
-
+        itemList.resetPreviousItem();
         budgetList.addItem(rentBudget);
         budgetList.addItem(foodBudget);
         budgetList.addItem(clothesBudget);
         types = itemList.getAllTypes();
+        budgetTypes = budgetList.getAllTypes();
         mainTabs = new javax.swing.JTabbedPane();
         currentMonthTab = new javax.swing.JPanel();
         expensesTable = new javax.swing.JTable();
@@ -71,6 +73,8 @@ public class BudgetorFrame extends javax.swing.JFrame {
         dayTitle = new javax.swing.JTextField();
         monthProgressBar = new javax.swing.JProgressBar();
         infoText = new javax.swing.JTextField();
+        totalText = new javax.swing.JTextField();
+        totalField = new javax.swing.JTextField();
         budgetTab = new javax.swing.JPanel();
         budgetTable = new javax.swing.JTable();
         budgetTitle = new javax.swing.JTextField();
@@ -103,26 +107,7 @@ public class BudgetorFrame extends javax.swing.JFrame {
         expensesTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         expensesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {"TOTAL", ""}
+                {null, null}
             },
             new String [] {
                 "Expense", "Sum"
@@ -324,6 +309,17 @@ public class BudgetorFrame extends javax.swing.JFrame {
         infoText.setSelectedTextColor(new java.awt.Color(240, 240, 240));
         infoText.setVerifyInputWhenFocusTarget(false);
 
+        totalText.setEditable(false);
+        totalText.setBackground(new java.awt.Color(225, 225, 225));
+        totalText.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        totalText.setText("TOTAL");
+        totalText.setFocusable(false);
+
+        totalField.setEditable(false);
+        totalField.setBackground(new java.awt.Color(225, 225, 225));
+        totalField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        totalField.setFocusable(false);
+
         javax.swing.GroupLayout currentMonthTabLayout = new javax.swing.GroupLayout(currentMonthTab);
         currentMonthTab.setLayout(currentMonthTabLayout);
         currentMonthTabLayout.setHorizontalGroup(
@@ -342,15 +338,15 @@ public class BudgetorFrame extends javax.swing.JFrame {
                     .addGroup(currentMonthTabLayout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addComponent(monthProgressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(currentMonthTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(18, 18, 18)
+                .addGroup(currentMonthTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(historyButton)
+                    .addComponent(expensesTable, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(currentMonthTabLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(expensesTable, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(21, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, currentMonthTabLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(historyButton)
-                        .addGap(41, 41, 41))))
+                        .addComponent(totalText, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(totalField)))
+                .addContainerGap(21, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, currentMonthTabLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(expensesTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -374,8 +370,12 @@ public class BudgetorFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(addCostPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(currentMonthTabLayout.createSequentialGroup()
-                        .addComponent(expensesTable, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(expensesTable, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(currentMonthTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(totalText, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(totalField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(historyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(45, 45, 45))
         );
@@ -678,7 +678,9 @@ public class BudgetorFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_historyButtonActionPerformed
 
     private void undoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_undoButtonActionPerformed
-        // TODO add your handling code here:
+        itemList.undoPrevious();
+        types = itemList.getAllTypes();
+        updateMonthTable();        
     }//GEN-LAST:event_undoButtonActionPerformed
 
     private void nameFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nameFieldFocusGained
@@ -767,7 +769,7 @@ public class BudgetorFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_typeFieldFocusLost
 
     private void priceFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_priceFieldFocusLost
-        if(priceField.getBackground() == Color.red && !priceField.getText().equals("ERROR") && !priceField.getText().equals(""))
+        if(priceField.getBackground() == Color.red && !priceField.getText().equals("ERROR") && !priceField.getText().equals("") && priceField.getText().matches("[0-9]+"))
             priceField.setBackground(new java.awt.Color(255,255,255));
         if(priceField.getText().equals(""))
             priceField.setText("Price");   
@@ -787,6 +789,8 @@ public class BudgetorFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_quantityFieldFocusLost
 
     private void nameFieldBudgetFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nameFieldBudgetFocusLost
+        if(nameFieldBudget.getBackground() == Color.red && !nameFieldBudget.getText().equals("ERROR") && !nameFieldBudget.getText().equals(""))
+            nameFieldBudget.setBackground(new java.awt.Color(255,255,255));        
         if(nameFieldBudget.getText().equals(""))
             nameFieldBudget.setText("Name");
     }//GEN-LAST:event_nameFieldBudgetFocusLost
@@ -797,9 +801,15 @@ public class BudgetorFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_typeFieldBudgetFocusLost
 
     private void priceFieldBudgetFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_priceFieldBudgetFocusLost
+        if(priceFieldBudget.getBackground() == Color.red && !priceFieldBudget.getText().equals("ERROR") && !priceFieldBudget.getText().equals("") && priceFieldBudget.getText().matches("[0-9]+"))
+            priceFieldBudget.setBackground(new java.awt.Color(255,255,255));        
         if(priceFieldBudget.getText().equals("")){
             priceFieldBudget.setText("Allocated cost");
             priceFieldBudget.setFont(new java.awt.Font("Tahoma", 0, 8));            
+        }
+        else if (!priceFieldBudget.getText().matches("[0-9]+")){
+            priceFieldBudget.setText("Allocated");        
+            priceFieldBudget.setFont(new java.awt.Font("Tahoma", 0, 8));
         }
     }//GEN-LAST:event_priceFieldBudgetFocusLost
 
@@ -821,12 +831,18 @@ public class BudgetorFrame extends javax.swing.JFrame {
         if(typeFieldBudget.getText().equals("") || typeFieldBudget.getText().equals("Type"))
             item.setType(nameFieldBudget.getText());
         else
-            item.setType(nameFieldBudget.getText());
+            item.setType(typeFieldBudget.getText());
         
         item.setName(nameFieldBudget.getText());
         item.setPrice(Integer.parseInt(priceFieldBudget.getText()));
         
-        budgetList.addItem(item);
+        if(budgetList.checkIfItemExists(item)){
+            budgetList.editItemPrice(item);
+            item = null;
+        }
+        else  
+            budgetList.addItem(item);
+        
         updateBudgetTable();
         
         nameFieldBudget.setText("Name");
@@ -842,21 +858,53 @@ public class BudgetorFrame extends javax.swing.JFrame {
    // <editor-fold defaultstate="collapsed" desc="Own code for trying stuff">    
     private void updateMonthTable(){
         types = itemList.getAllTypes();
-        for(int i=0; i < types.size(); i++){
-            expensesTable.getModel().setValueAt(types.get(i), i, 0);
-            expensesTable.getModel().setValueAt(itemList.getPriceFromType(types.get(i)) + " " + currency, i, 1);
+        budgetTypes = budgetList.getAllTypes();
+        for(int i=0; i < expensesTable.getRowCount(); i++){
+            expensesTable.getModel().setValueAt(null, i, 0);            
+            expensesTable.getModel().setValueAt(null, i, 1);            
+        }
+        for(int i=0; i < budgetTypes.size(); i++){
+            expensesTable.getModel().setValueAt(budgetTypes.get(i), i, 0);
+            expensesTable.getModel().setValueAt(0 + "/" + budgetList.getPriceFromType(budgetTypes.get(i)) + " " + currency, i, 1);
+            if(i >= expensesTable.getRowCount() - 1){
+                javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) expensesTable.getModel();
+                model.addRow(new Object[]{null, null});
+            }            
+        }
+        for(int i=0; i < types.size(); i++){                                // Get values for types
+            int pos;
+            for(int j=0; j < budgetTypes.size(); j++){
+                if(budgetTypes.get(j).equals(types.get(i)))
+                    pos = j;
+            }
+            if(budgetList.checkIfTypeExists(types.get(i)))
+                expensesTable.getModel().setValueAt(itemList.getPriceFromType(types.get(i)) + "/" + budgetList.getPriceFromType(types.get(i)) + " " + currency, i, 1);
+            else{
+                expensesTable.getModel().setValueAt(types.get(i), i, 0);                
+                expensesTable.getModel().setValueAt(itemList.getPriceFromType(types.get(i)) + "/" + 0 + " " + currency, i, 1);
+            }
+            if(i >= expensesTable.getRowCount() - 1){
+                javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) expensesTable.getModel();
+                model.addRow(new Object[]{null, null});
+            }            
         }
 
         int totalVal = 0;
-        for(int i=0; i < expensesTable.getRowCount() - 1; i++){
+        int totalBudget = 0;
+        for(int i=0; i < expensesTable.getRowCount(); i++){             // Calculate total of sums
             if(expensesTable.getModel().getValueAt(i, 1) != null){
                 String val = (String) expensesTable.getModel().getValueAt(i, 1);
+                val = val.substring(0, val.indexOf("/"));
                 val = val.replace(currency, "");
                 val = val.replace(" ", "");
                 totalVal += Integer.parseInt(val);
             }
         }
-        expensesTable.getModel().setValueAt(totalVal + " " + currency, 19, 1);
+        for(int i=0; i < budgetList.getSize(); i++){
+            totalBudget += budgetList.getItemAt(i).getPrice();
+        }
+        
+        totalField.setText(totalVal + "/" +  totalBudget + currency);
     }
     
     private void updateBudgetTable(){
@@ -871,6 +919,7 @@ public class BudgetorFrame extends javax.swing.JFrame {
             else
                 budgetTable.getModel().setValueAt(budgetList.getItemAt(i).getName() + " <" + budgetList.getItemAt(i).getType() + ">" , i, 0);
         }
+        updateMonthTable();
     }    
     
     private boolean checkCostInput(){           // Check validity of add cost inputs
@@ -1006,6 +1055,8 @@ public class BudgetorFrame extends javax.swing.JFrame {
     private javax.swing.JSeparator separator2;
     private javax.swing.JTabbedPane settingsCategoryTabs;
     private javax.swing.JPanel settingsTab;
+    private javax.swing.JTextField totalField;
+    private javax.swing.JTextField totalText;
     private javax.swing.JTextField typeField;
     private javax.swing.JTextField typeFieldBudget;
     private javax.swing.JButton undoButton;

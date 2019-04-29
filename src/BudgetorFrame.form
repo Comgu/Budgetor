@@ -49,7 +49,7 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="// Setting default data to program&#xa;        CostItem rent = new CostItem(&quot;Rent&quot;, 300, 1);&#xa;        CostItem food = new CostItem(&quot;Food&quot;, 200, 1);&#xa;        CostItem clothes = new CostItem(&quot;Clothes&quot;, &quot;Other&quot;, 50, 1);        &#xa;        BudgetItem rentBudget = new BudgetItem(&quot;Rent&quot;, 500);&#xa;        BudgetItem foodBudget = new BudgetItem(&quot;Food&quot;, 400);&#xa;        BudgetItem clothesBudget = new BudgetItem(&quot;Clothes&quot;, &quot;Other&quot;, 100);&#xa;        &#xa;        itemList.addItem(rent);&#xa;        itemList.addItem(food);&#xa;        itemList.addItem(clothes);&#xa;        &#xa;        budgetList.addItem(rentBudget);&#xa;        budgetList.addItem(foodBudget);&#xa;        budgetList.addItem(clothesBudget);        &#xa;        types = itemList.getAllTypes();"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="// Setting default data to program&#xa;        CostItem rent = new CostItem(&quot;Rent&quot;, 300, 1);&#xa;        CostItem food = new CostItem(&quot;Food&quot;, 200, 1);&#xa;        CostItem clothes = new CostItem(&quot;Clothes&quot;, &quot;Other&quot;, 50, 1);        &#xa;        BudgetItem rentBudget = new BudgetItem(&quot;Rent&quot;, 500);&#xa;        BudgetItem foodBudget = new BudgetItem(&quot;Food&quot;, 400);&#xa;        BudgetItem clothesBudget = new BudgetItem(&quot;Clothes&quot;, &quot;Other&quot;, 100);&#xa;        &#xa;        itemList.addItem(rent);&#xa;        itemList.addItem(food);&#xa;        itemList.addItem(clothes);&#xa;        itemList.resetPreviousItem();&#xa;        budgetList.addItem(rentBudget);&#xa;        budgetList.addItem(foodBudget);&#xa;        budgetList.addItem(clothesBudget);        &#xa;        types = itemList.getAllTypes();&#xa;        budgetTypes = budgetList.getAllTypes();"/>
       </AuxValues>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
@@ -85,18 +85,17 @@
                               <Component id="monthProgressBar" min="-2" pref="276" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="historyButton" min="-2" max="-2" attributes="0"/>
+                          <Component id="expensesTable" min="-2" pref="255" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="expensesTable" min="-2" pref="255" max="-2" attributes="0"/>
-                              <EmptySpace pref="21" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="historyButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                              <Component id="totalText" min="-2" pref="123" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="totalField" max="32767" attributes="0"/>
                           </Group>
                       </Group>
+                      <EmptySpace pref="21" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
@@ -126,8 +125,13 @@
                               <Component id="addCostPanel" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Component id="expensesTable" max="32767" attributes="0"/>
+                              <Component id="expensesTable" min="-2" pref="289" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="totalText" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                                  <Component id="totalField" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Component id="historyButton" min="-2" pref="33" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -145,51 +149,9 @@
                   </Border>
                 </Property>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="2" rowCount="20">
-                    <Column editable="false" title="Expense" type="java.lang.String">
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="TOTAL"/>
-                    </Column>
-                    <Column editable="false" title="Sum" type="java.lang.String">
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value=""/>
-                    </Column>
+                  <Table columnCount="2" rowCount="1">
+                    <Column editable="false" title="Expense" type="java.lang.String"/>
+                    <Column editable="false" title="Sum" type="java.lang.String"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="updateMonthTable();">
@@ -459,6 +421,27 @@
                   <Color blue="f0" green="f0" red="f0" type="rgb"/>
                 </Property>
                 <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="totalText">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="e1" green="e1" red="e1" type="rgb"/>
+                </Property>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="text" type="java.lang.String" value="TOTAL"/>
+                <Property name="focusable" type="boolean" value="false"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="totalField">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="e1" green="e1" red="e1" type="rgb"/>
+                </Property>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="focusable" type="boolean" value="false"/>
               </Properties>
             </Component>
           </SubComponents>

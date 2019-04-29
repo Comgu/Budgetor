@@ -5,6 +5,19 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 
+/* TO DO:   History class                                                       (30 min)
+            Budget adding panel finish                                          (20 min)
+            Buttons for removing budget and cost items, also to history         (60 min)
+            Statistical representation for month and budget                     (30 min)
+            More settings?                                                      (15 min)
+            Maybe table expanding for month                                     (30 min)
+            Budget part for month table (200/300 €), coloring if over           (15 min)
+            Undo previous cost                                                  (30 min)
+            Notification when added new cost/budget                             (15 min)
+            Up/Down arrows for raising budget                                   (15 min)
+            Editing budget items in adjust by typing                            (15 min)
+            Apply & reset buttons for settings                                  (15 min)
+*/
 public class BudgetorFrame extends javax.swing.JFrame {
     CostList itemList = new CostList();
     BudgetList budgetList = new BudgetList();
@@ -691,12 +704,11 @@ public class BudgetorFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_quantityFieldFocusGained
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        CostItem item = new CostItem();
         if(!checkCostInput()){
             checkInvalidInputCost();
             return;
         }
-            
+        CostItem item = new CostItem();
         if(typeField.getText().equals("") || typeField.getText().equals("Type"))
             item.setType(nameField.getText());
         else 
@@ -796,8 +808,8 @@ public class BudgetorFrame extends javax.swing.JFrame {
             currency = "$";
         else
             currency = "€";
-      updateMonthTable();
-      updateBudgetTable();
+        updateMonthTable();
+        updateBudgetTable();
     }//GEN-LAST:event_currencyDropdownFocusLost
 
     private void addButtonBudgetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonBudgetActionPerformed
@@ -805,7 +817,27 @@ public class BudgetorFrame extends javax.swing.JFrame {
             checkInvalidInputBudget();
             return;
         }
+        BudgetItem item = new BudgetItem();
+        if(typeFieldBudget.getText().equals("") || typeFieldBudget.getText().equals("Type"))
+            item.setType(nameFieldBudget.getText());
+        else
+            item.setType(nameFieldBudget.getText());
         
+        item.setName(nameFieldBudget.getText());
+        item.setPrice(Integer.parseInt(priceFieldBudget.getText()));
+        
+        budgetList.addItem(item);
+        updateBudgetTable();
+        
+        nameFieldBudget.setText("Name");
+        typeFieldBudget.setText("Type");
+        priceFieldBudget.setText("Allocated cost");
+        priceFieldBudget.setFont(new java.awt.Font("Tahoma", 0, 8));        
+        
+        nameFieldBudget.setToolTipText("Insert cost name here");
+        priceFieldBudget.setToolTipText("Insert price here");
+        nameFieldBudget.setBackground(new java.awt.Color(255,255,255));
+        priceFieldBudget.setBackground(new java.awt.Color(255,255,255));  
     }//GEN-LAST:event_addButtonBudgetActionPerformed
    // <editor-fold defaultstate="collapsed" desc="Own code for trying stuff">    
     private void updateMonthTable(){

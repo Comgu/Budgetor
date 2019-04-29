@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 public class CostList {
     ArrayList<CostItem> itemList;
@@ -18,7 +19,15 @@ public class CostList {
         this.itemList.remove(item);
         if(this.previousItem == item)
             this.previousItem = null;
-    }  
+    }
+    public void deleteItem(String name, String type, int price, int quantity,  LocalDate date){
+        for(int i=0; i < itemList.size(); i++){
+            CostItem item = new CostItem(name, type, price, quantity, date);
+            if(item.getName().equals(name) && item.getType().equals(type) && item.getPrice() == price && item.getQuantity() == quantity && item.getDate() == date){
+                deleteItem(itemList.get(i));
+            }
+       }
+    }      
 
     public CostItem getItemAt(int i){
         return this.itemList.get(i);

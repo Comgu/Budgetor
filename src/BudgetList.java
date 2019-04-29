@@ -55,6 +55,15 @@ public class BudgetList {
         return val;
     }
     
+    public int getTotalPrice(){
+        int val=0;
+        for(int i=0; i < budgetList.size(); i++){
+            val += budgetList.get(i).getPrice();
+        }
+        
+        return val;
+    }
+    
     public void editItemPrice(BudgetItem item){
         for(int i=0; i < this.budgetList.size(); i++){
             if(item.getName().equals(this.budgetList.get(i).getName()) && item.getType().equals(this.budgetList.get(i).getType()))

@@ -14,13 +14,21 @@ public class CostItem {
         date = curDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     }
     
+    public CostItem(String inputName, String inputType, int inputPrice, int inputQuantity, LocalDate inputDate){
+        this.name = inputName;
+        this.type = inputType;
+        this.price = inputPrice;
+        this.quantity = inputQuantity;
+        this.date = inputDate;
+    }    
+    
     public CostItem(String inputName, String inputType, int inputPrice, int inputQuantity){
         this.name = inputName;
         this.type = inputType;
         this.price = inputPrice;
         this.quantity = inputQuantity;
         Date curDate = new Date();
-        date = curDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        this.date = curDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     }
     
     public CostItem(String inputName, int inputPrice, int inputQuantity){
@@ -29,7 +37,7 @@ public class CostItem {
         this.price = inputPrice;
         this.quantity = inputQuantity;
         Date curDate = new Date();
-        date = curDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();        
+        this.date = curDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();        
     }
     
     public void setName(String inputName){

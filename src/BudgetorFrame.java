@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 public class BudgetorFrame extends javax.swing.JFrame {
     CostList itemList = new CostList();
+    BudgetList budgetList = new BudgetList();
     ArrayList<String> types;   
     String currency = "$";    
     
@@ -28,11 +29,17 @@ public class BudgetorFrame extends javax.swing.JFrame {
         CostItem rent = new CostItem("Rent", 300, 1);
         CostItem food = new CostItem("Food", 200, 1);
         CostItem clothes = new CostItem("Clothes", "Other", 50, 1);
+        BudgetItem rentBudget = new BudgetItem("Rent", 500);
+        BudgetItem foodBudget = new BudgetItem("Food", 400);
+        BudgetItem clothesBudget = new BudgetItem("Clothes", "Other", 100);
 
         itemList.addItem(rent);
         itemList.addItem(food);
         itemList.addItem(clothes);
 
+        budgetList.addItem(rentBudget);
+        budgetList.addItem(foodBudget);
+        budgetList.addItem(clothesBudget);
         types = itemList.getAllTypes();
         mainTabs = new javax.swing.JTabbedPane();
         currentMonthTab = new javax.swing.JPanel();
@@ -164,11 +171,6 @@ public class BudgetorFrame extends javax.swing.JFrame {
                 nameFieldFocusLost(evt);
             }
         });
-        nameField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nameFieldActionPerformed(evt);
-            }
-        });
 
         typeField.setText("Type");
         typeField.setToolTipText("Insert cost type");
@@ -178,11 +180,6 @@ public class BudgetorFrame extends javax.swing.JFrame {
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 typeFieldFocusLost(evt);
-            }
-        });
-        typeField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                typeFieldActionPerformed(evt);
             }
         });
 
@@ -313,11 +310,6 @@ public class BudgetorFrame extends javax.swing.JFrame {
         infoText.setRequestFocusEnabled(false);
         infoText.setSelectedTextColor(new java.awt.Color(240, 240, 240));
         infoText.setVerifyInputWhenFocusTarget(false);
-        infoText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                infoTextActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout currentMonthTabLayout = new javax.swing.GroupLayout(currentMonthTab);
         currentMonthTab.setLayout(currentMonthTabLayout);
@@ -386,22 +378,6 @@ public class BudgetorFrame extends javax.swing.JFrame {
         budgetTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         budgetTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Rent", "400/400 €"},
-                {"Food", "300/400 €"},
-                {"Other", "220/200 €"},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
                 {null, null}
             },
             new String [] {
@@ -456,11 +432,6 @@ public class BudgetorFrame extends javax.swing.JFrame {
                 nameFieldBudgetFocusLost(evt);
             }
         });
-        nameFieldBudget.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nameFieldBudgetActionPerformed(evt);
-            }
-        });
 
         typeFieldBudget.setText("Type");
         typeFieldBudget.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -469,11 +440,6 @@ public class BudgetorFrame extends javax.swing.JFrame {
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 typeFieldBudgetFocusLost(evt);
-            }
-        });
-        typeFieldBudget.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                typeFieldBudgetActionPerformed(evt);
             }
         });
 
@@ -487,13 +453,13 @@ public class BudgetorFrame extends javax.swing.JFrame {
                 priceFieldBudgetFocusLost(evt);
             }
         });
-        priceFieldBudget.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                priceFieldBudgetActionPerformed(evt);
-            }
-        });
 
         addButtonBudget.setText("ADD");
+        addButtonBudget.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonBudgetActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout addBudgetPanelLayout = new javax.swing.GroupLayout(addBudgetPanel);
         addBudgetPanel.setLayout(addBudgetPanelLayout);
@@ -585,6 +551,7 @@ public class BudgetorFrame extends javax.swing.JFrame {
             budgetTable.getColumnModel().getColumn(0).setResizable(false);
             budgetTable.getColumnModel().getColumn(1).setResizable(false);
         }
+        updateBudgetTable();
 
         mainTabs.addTab("BUDGET ADJUSTMENT", budgetTab);
 
@@ -596,11 +563,6 @@ public class BudgetorFrame extends javax.swing.JFrame {
         currencyText.setText("Currency type");
         currencyText.setToolTipText("Choose which currency to use (Dollar or Euro)");
         currencyText.setFocusable(false);
-        currencyText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                currencyTextActionPerformed(evt);
-            }
-        });
 
         currencyDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dollar $", "Euro €" }));
         currencyDropdown.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -640,11 +602,6 @@ public class BudgetorFrame extends javax.swing.JFrame {
         languageText.setText("Language");
         languageText.setToolTipText("Choose which currency to use (Dollar or Euro)");
         languageText.setFocusable(false);
-        languageText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                languageTextActionPerformed(evt);
-            }
-        });
 
         languageDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "English" }));
 
@@ -707,33 +664,9 @@ public class BudgetorFrame extends javax.swing.JFrame {
         new HistoryFrame().setVisible(true);
     }//GEN-LAST:event_historyButtonActionPerformed
 
-    private void nameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nameFieldActionPerformed
-
-    private void typeFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_typeFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_typeFieldActionPerformed
-
     private void undoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_undoButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_undoButtonActionPerformed
-
-    private void currencyTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_currencyTextActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_currencyTextActionPerformed
-
-    private void languageTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_languageTextActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_languageTextActionPerformed
-
-    private void nameFieldBudgetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameFieldBudgetActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nameFieldBudgetActionPerformed
-
-    private void typeFieldBudgetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_typeFieldBudgetActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_typeFieldBudgetActionPerformed
 
     private void nameFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nameFieldFocusGained
         if(nameField.getText().equals("Name") || nameField.getText().equals("ERROR"))
@@ -760,7 +693,7 @@ public class BudgetorFrame extends javax.swing.JFrame {
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         CostItem item = new CostItem();
         if(!checkCostInput()){
-            checkInvalidInput();
+            checkInvalidInputCost();
             return;
         }
             
@@ -793,7 +726,7 @@ public class BudgetorFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void nameFieldBudgetFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nameFieldBudgetFocusGained
-        if(nameFieldBudget.getText().equals("Name"))
+        if(nameFieldBudget.getText().equals("Name") || nameFieldBudget.getText().equals("ERROR"))
             nameFieldBudget.setText("");
     }//GEN-LAST:event_nameFieldBudgetFocusGained
 
@@ -803,15 +736,11 @@ public class BudgetorFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_typeFieldBudgetFocusGained
 
     private void priceFieldBudgetFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_priceFieldBudgetFocusGained
-        if(priceFieldBudget.getText().equals("Allocated cost")){
+        if(priceFieldBudget.getText().equals("Allocated cost") || priceFieldBudget.getText().equals("ERROR")){
             priceFieldBudget.setText("");
             priceFieldBudget.setFont(new java.awt.Font("Tahoma", 0, 11));            
         }
     }//GEN-LAST:event_priceFieldBudgetFocusGained
-
-    private void priceFieldBudgetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceFieldBudgetActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_priceFieldBudgetActionPerformed
 
     private void nameFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nameFieldFocusLost
         if(nameField.getBackground() == Color.red && !nameField.getText().equals("ERROR") && !nameField.getText().equals(""))
@@ -862,17 +791,22 @@ public class BudgetorFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_priceFieldBudgetFocusLost
 
-    private void infoTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_infoTextActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_infoTextActionPerformed
-
     private void currencyDropdownFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_currencyDropdownFocusLost
         if(currencyDropdown.getSelectedItem().equals("Dollar"))
             currency = "$";
         else
             currency = "€";
-      updateMonthTable();       
+      updateMonthTable();
+      updateBudgetTable();
     }//GEN-LAST:event_currencyDropdownFocusLost
+
+    private void addButtonBudgetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonBudgetActionPerformed
+        if(!checkBudgetInput()){
+            checkInvalidInputBudget();
+            return;
+        }
+        
+    }//GEN-LAST:event_addButtonBudgetActionPerformed
    // <editor-fold defaultstate="collapsed" desc="Own code for trying stuff">    
     private void updateMonthTable(){
         types = itemList.getAllTypes();
@@ -893,26 +827,64 @@ public class BudgetorFrame extends javax.swing.JFrame {
         expensesTable.getModel().setValueAt(totalVal + " " + currency, 19, 1);
     }
     
+    private void updateBudgetTable(){
+        for(int i=0; i < budgetList.getSize(); i++){
+            if(i >= budgetTable.getRowCount()){
+                javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) budgetTable.getModel();
+                model.addRow(new Object[]{null, null});
+            }
+            budgetTable.getModel().setValueAt(budgetList.getItemAt(i).getPrice() + " " + currency, i, 1);
+            if(budgetList.getItemAt(i).getType().equals(budgetList.getItemAt(i).getName()))
+                budgetTable.getModel().setValueAt(budgetList.getItemAt(i).getName(), i, 0);
+            else
+                budgetTable.getModel().setValueAt(budgetList.getItemAt(i).getName() + " <" + budgetList.getItemAt(i).getType() + ">" , i, 0);
+        }
+    }    
+    
     private boolean checkCostInput(){           // Check validity of add cost inputs
         boolean validity = true;
-        if(nameField.getText().equals("") || nameField.getText().equals("Name"))
+        if(nameField.getText().equals("") || nameField.getText().equals("Name") || nameField.getText().equals("ERROR"))
             validity = false;
-        else if(priceField.getText().equals("") || priceField.getText().equals("Price"))
+        else if(priceField.getText().equals("") || priceField.getText().equals("Price") || priceField.getText().equals("ERROR"))
             validity = false;
         
         return validity;     
     }
     
-    private void checkInvalidInput(){
-        if(nameField.getText().equals("") || nameField.getText().equals("Name")){
+    private boolean checkBudgetInput(){           // Check validity of add cost inputs
+        boolean validity = true;
+        if(nameFieldBudget.getText().equals("") || nameFieldBudget.getText().equals("Name") || nameFieldBudget.getText().equals("ERROR"))
+            validity = false;
+        else if(priceFieldBudget.getText().equals("") || priceFieldBudget.getText().equals("Allocated cost") || priceFieldBudget.getText().equals("ERROR"))
+            validity = false;
+        
+        return validity;     
+    }
+    
+    private void checkInvalidInputCost(){
+        if(nameField.getText().equals("") || nameField.getText().equals("Name") || nameField.getText().equals("ERROR")){
             nameField.setText("ERROR");
             nameField.setToolTipText("Insert proper name (Not 'Name' or empty field)");
             nameField.setBackground(Color.red);
         }
-        if(priceField.getText().equals("") || priceField.getText().equals("Price")){
+        if(priceField.getText().equals("") || priceField.getText().equals("Price") || priceField.getText().equals("ERROR")){
             priceField.setText("ERROR");
             priceField.setToolTipText("Insert proper price (Not 'Price', empty field. Only numbers)");
-            priceField.setBackground(Color.red);            
+            priceField.setBackground(Color.red);                 
+        }
+    }
+
+    private void checkInvalidInputBudget(){
+        if(nameFieldBudget.getText().equals("") || nameFieldBudget.getText().equals("Name")  || nameFieldBudget.getText().equals("ERROR")){
+            nameFieldBudget.setText("ERROR");
+            nameFieldBudget.setToolTipText("Insert proper name (Not 'Name' or empty field)");
+            nameFieldBudget.setBackground(Color.red);
+        }
+        if(priceFieldBudget.getText().equals("") || priceFieldBudget.getText().equals("Allocated cost") || priceFieldBudget.getText().equals("ERROR")){
+            priceFieldBudget.setText("ERROR");
+            priceFieldBudget.setToolTipText("Insert proper price (Not 'Price', empty field. Only numbers)");
+            priceFieldBudget.setBackground(Color.red);      
+            priceFieldBudget.setFont(new java.awt.Font("Tahoma", 0, 11));              
         }
     }
     

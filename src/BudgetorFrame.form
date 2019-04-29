@@ -49,7 +49,7 @@
         </Property>
       </Properties>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="// Setting default data to program&#xa;        CostItem rent = new CostItem(&quot;Rent&quot;, 300, 1);&#xa;        CostItem food = new CostItem(&quot;Food&quot;, 200, 1);&#xa;        CostItem clothes = new CostItem(&quot;Clothes&quot;, &quot;Other&quot;, 50, 1);        &#xa;&#xa;        itemList.addItem(rent);&#xa;        itemList.addItem(food);&#xa;        itemList.addItem(clothes);&#xa;        &#xa;        types = itemList.getAllTypes();"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="// Setting default data to program&#xa;        CostItem rent = new CostItem(&quot;Rent&quot;, 300, 1);&#xa;        CostItem food = new CostItem(&quot;Food&quot;, 200, 1);&#xa;        CostItem clothes = new CostItem(&quot;Clothes&quot;, &quot;Other&quot;, 50, 1);        &#xa;        BudgetItem rentBudget = new BudgetItem(&quot;Rent&quot;, 500);&#xa;        BudgetItem foodBudget = new BudgetItem(&quot;Food&quot;, 400);&#xa;        BudgetItem clothesBudget = new BudgetItem(&quot;Clothes&quot;, &quot;Other&quot;, 100);&#xa;        &#xa;        itemList.addItem(rent);&#xa;        itemList.addItem(food);&#xa;        itemList.addItem(clothes);&#xa;        &#xa;        budgetList.addItem(rentBudget);&#xa;        budgetList.addItem(foodBudget);&#xa;        budgetList.addItem(clothesBudget);        &#xa;        types = itemList.getAllTypes();"/>
       </AuxValues>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
@@ -339,7 +339,6 @@
                   <Events>
                     <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="nameFieldFocusGained"/>
                     <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="nameFieldFocusLost"/>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nameFieldActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="typeField">
@@ -350,7 +349,6 @@
                   <Events>
                     <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="typeFieldFocusGained"/>
                     <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="typeFieldFocusLost"/>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="typeFieldActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="priceField">
@@ -462,9 +460,6 @@
                 </Property>
                 <Property name="verifyInputWhenFocusTarget" type="boolean" value="false"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="infoTextActionPerformed"/>
-              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -537,48 +532,12 @@
                   </Border>
                 </Property>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="2" rowCount="17">
-                    <Column editable="false" title="Expense" type="java.lang.String">
-                      <Data value="Rent"/>
-                      <Data value="Food"/>
-                      <Data value="Other"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                    </Column>
-                    <Column editable="false" title="Sum" type="java.lang.String">
-                      <Data value="400/400 &#x20ac;"/>
-                      <Data value="300/400 &#x20ac;"/>
-                      <Data value="220/200 &#x20ac;"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                      <Data value="null"/>
-                    </Column>
+                  <Table columnCount="2" rowCount="1">
+                    <Column editable="false" title="Expense" type="java.lang.String"/>
+                    <Column editable="false" title="Sum" type="java.lang.String"/>
                   </Table>
                 </Property>
-                <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor" postCode="updateBudgetTable();">
                   <TableColumnModel selectionModel="0">
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                       <Title/>
@@ -699,7 +658,6 @@
                   <Events>
                     <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="nameFieldBudgetFocusGained"/>
                     <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="nameFieldBudgetFocusLost"/>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nameFieldBudgetActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="typeFieldBudget">
@@ -709,7 +667,6 @@
                   <Events>
                     <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="typeFieldBudgetFocusGained"/>
                     <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="typeFieldBudgetFocusLost"/>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="typeFieldBudgetActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JTextField" name="priceFieldBudget">
@@ -722,13 +679,15 @@
                   <Events>
                     <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="priceFieldBudgetFocusGained"/>
                     <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="priceFieldBudgetFocusLost"/>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="priceFieldBudgetActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="addButtonBudget">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="ADD"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addButtonBudgetActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -836,9 +795,6 @@
                         <Property name="toolTipText" type="java.lang.String" value="Choose which currency to use (Dollar or Euro)"/>
                         <Property name="focusable" type="boolean" value="false"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="currencyTextActionPerformed"/>
-                      </Events>
                     </Component>
                     <Component class="javax.swing.JSeparator" name="separator1">
                     </Component>
@@ -908,9 +864,6 @@
                         <Property name="toolTipText" type="java.lang.String" value="Choose which currency to use (Dollar or Euro)"/>
                         <Property name="focusable" type="boolean" value="false"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="languageTextActionPerformed"/>
-                      </Events>
                     </Component>
                     <Component class="javax.swing.JSeparator" name="separator2">
                     </Component>

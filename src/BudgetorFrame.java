@@ -1053,12 +1053,12 @@ public class BudgetorFrame extends javax.swing.JFrame {
             String name = (String) model.getValueAt(rows[i], 0);
             String type = (String) model.getValueAt(rows[i], 1);
             String prices = (String) model.getValueAt(rows[i], 2);
-            String priceStr = prices.substring(0, prices.indexOf("x"));
-            String quantityStr = prices.substring(prices.indexOf("x"), prices.length());
+            String quantityStr = prices.substring(0, prices.indexOf("x")-1);
+            String priceStr = prices.substring(prices.indexOf("x")+1, prices.length());
             priceStr = priceStr.replaceAll("[^0-9]", "");
             int price = Integer.parseInt(priceStr);
             quantityStr = quantityStr.replaceAll("[^0-9]", "");
-            int quantity = Integer.parseInt(quantityStr);
+            int quantity = Integer.parseInt(quantityStr);      
             LocalDate date = (LocalDate) model.getValueAt(rows[i], 3);
             itemList.deleteItem(name, type, price, quantity, date);
             model.removeRow(rows[i]-i);          
@@ -1074,13 +1074,18 @@ public class BudgetorFrame extends javax.swing.JFrame {
             String nameAndType = (String) model.getValueAt(rows[i], 0);
             String name;
             String type;
-            if(nameAndType.indexOf("<") != -1){
+            if(nameAndType.contains("<") == true){
                 name = nameAndType.substring(0, nameAndType.indexOf("<"));
+                name = name.replace("<","");
+                name = name.replace(" ","");                
                 type = nameAndType.substring(nameAndType.indexOf("<"), nameAndType.indexOf(">"));
+                type = type.replace("<","");
+                type = type.replace(">","");
+                type = type.replace(" ","");                
             }
             else{
                 name = nameAndType;
-                type = name;
+                type = nameAndType;
             }
             String priceStr = (String) model.getValueAt(rows[i], 1);
             priceStr = priceStr.replace(currency, "");
